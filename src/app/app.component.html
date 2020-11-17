@@ -3,3 +3,20 @@
     <span>An efficient recommendation system using BERT-as-a-service</span>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<h4 class="input-text">Select a Movie you like!!</h4>
+<div class="input-data">
+  <mat-form-field appearance="fill" class="input-dropdown" floatLabel="never">
+    <mat-label>Choose a movie</mat-label>
+    <mat-select [(value)]="selected">
+      <ng-container *ngFor="let movie of movies">
+        <mat-option [value]="movie.id">{{ movie.name }}</mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+
+<div *ngIf="selected">
+  selected movie: {{getSelectedMovie()}}
+</div>

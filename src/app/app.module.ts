@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   HttpClientModule,
@@ -23,6 +24,8 @@ import { AppComponent } from './app.component';
     MatCardModule,
     MatToolbarModule,
     MatIconModule,
+    MatSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent],
