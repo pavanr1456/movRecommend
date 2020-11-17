@@ -1,5 +1,7 @@
 # MovRecommend
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e339a680-52fd-4116-8ab8-9f37ca26c8ba/deploy-status)](https://app.netlify.com/sites/anumovierecommender/deploys)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
 
 ## Development server
