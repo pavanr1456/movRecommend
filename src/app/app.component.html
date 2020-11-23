@@ -10,16 +10,20 @@
     <mat-label>Choose a movie</mat-label>
     <mat-select [(value)]="selected" (selectionChange)="getRecommendations()">
       <ng-container *ngFor="let movie of movies">
-        <mat-option [value]="movie.movie_id">{{ movie.movie_name }}</mat-option>
+        <mat-option [value]="movie.id">{{ movie.name }}</mat-option>
       </ng-container>
     </mat-select>
   </mat-form-field>
 </div>
 
-<mat-divider style="padding: 20px;"></mat-divider>
+<mat-divider style="padding: 20px"></mat-divider>
 
 <h3 class="input-text" *ngIf="currentRecommendations.length > 0">
   We think you might like these !!
+</h3>
+
+<h3 class="input-text" *ngIf="currentRecommendations.length === 0 && selected">
+  We didn't find any recommendations !!
 </h3>
 
 <div>
@@ -28,41 +32,41 @@
       <div class="recom" *ngIf="currentRecommendations.length > 0">
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[0].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[0])" />
             <span class="movie-name">
-              {{ currentRecommendations[0].movie_name }}
+              {{ currentRecommendations[0].names }}
             </span>
           </div>
         </mat-card>
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[1].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[1])" />
             <span class="movie-name">
-              {{ currentRecommendations[1].movie_name }}
+              {{ currentRecommendations[1].names }}
             </span>
           </div></mat-card
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[2].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[2])" />
             <span class="movie-name">
-              {{ currentRecommendations[2].movie_name }}
+              {{ currentRecommendations[2].names }}
             </span>
           </div></mat-card
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[3].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[3])" />
             <span class="movie-name">
-              {{ currentRecommendations[2].movie_name }}
+              {{ currentRecommendations[3].names }}
             </span>
           </div></mat-card
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[4].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[4])" />
             <span class="movie-name">
-              {{ currentRecommendations[2].movie_name }}
+              {{ currentRecommendations[4].names }}
             </span>
           </div></mat-card
         >
@@ -73,135 +77,135 @@
       <div class="recom" *ngIf="currentRecommendations.length > 5">
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[5].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[5])" />
             <span class="movie-name">
-              {{ currentRecommendations[0].movie_name }}
+              {{ currentRecommendations[5].names }}
             </span>
           </div>
         </mat-card>
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[6].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[6])" />
             <span class="movie-name">
-              {{ currentRecommendations[1].movie_name }}
+              {{ currentRecommendations[6].names }}
             </span>
           </div></mat-card
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[7].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[7])" />
             <span class="movie-name">
-              {{ currentRecommendations[2].movie_name }}
+              {{ currentRecommendations[7].names }}
             </span>
           </div></mat-card
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[8].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[8])" />
             <span class="movie-name">
-              {{ currentRecommendations[2].movie_name }}
+              {{ currentRecommendations[8].names }}
             </span>
           </div></mat-card
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[9].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[9])" />
             <span class="movie-name">
-              {{ currentRecommendations[2].movie_name }}
+              {{ currentRecommendations[9].names }}
             </span>
           </div></mat-card
         >
       </div>
     </ng-template>
 
-    <ng-template ngbSlide>
+    <!-- <ng-template ngbSlide>
       <div class="recom" *ngIf="currentRecommendations.length > 10">
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[10].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[10]" />
             <span class="movie-name">
-              {{ currentRecommendations[0].movie_name }}
+              {{ currentRecommendations[0].name }}
             </span>
           </div>
         </mat-card>
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[11].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[11]" />
             <span class="movie-name">
-              {{ currentRecommendations[1].movie_name }}
+              {{ currentRecommendations[1].name }}
             </span>
           </div></mat-card
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[12].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[12]" />
             <span class="movie-name">
-              {{ currentRecommendations[2].movie_name }}
+              {{ currentRecommendations[2].name }}
             </span>
           </div></mat-card
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[13].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[13]" />
             <span class="movie-name">
-              {{ currentRecommendations[2].movie_name }}
+              {{ currentRecommendations[2].name }}
             </span>
           </div></mat-card
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[14].image_link" />
+            <img class="image" [src]="getLink(currentRecommendations[14]" />
             <span class="movie-name">
-              {{ currentRecommendations[2].movie_name }}
+              {{ currentRecommendations[2].name }}
             </span>
           </div></mat-card
         >
       </div>
-    </ng-template>
+    </ng-template> -->
 
-    <ng-template ngbSlide>
+    <!-- <ng-template ngbSlide>
       <div class="recom" *ngIf="currentRecommendations.length > 15">
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[15].image_link" />
+            <img class="image" [src]="currentRecommendations[15]" />
             <span class="movie-name">
-              {{ currentRecommendations[0].movie_name }}
+              {{ currentRecommendations[0].name }}
             </span>
           </div>
         </mat-card>
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[16].image_link" />
+            <img class="image" [src]="currentRecommendations[16]" />
             <span class="movie-name">
-              {{ currentRecommendations[1].movie_name }}
+              {{ currentRecommendations[1].name }}
             </span>
           </div></mat-card
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[17].image_link" />
+            <img class="image" [src]="currentRecommendations[17]" />
             <span class="movie-name">
-              {{ currentRecommendations[2].movie_name }}
+              {{ currentRecommendations[2].name }}
             </span>
           </div></mat-card
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[18].image_link" />
+            <img class="image" [src]="currentRecommendations[18]" />
             <span class="movie-name">
-              {{ currentRecommendations[2].movie_name }}
+              {{ currentRecommendations[2].name }}
             </span>
           </div></mat-card
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="currentRecommendations[19].image_link" />
+            <img class="image" [src]="currentRecommendations[19]" />
             <span class="movie-name">
-              {{ currentRecommendations[2].movie_name }}
+              {{ currentRecommendations[2].name }}
             </span>
           </div></mat-card
         >
       </div>
-    </ng-template>
+    </ng-template> -->
   </ngb-carousel>
 </div>
