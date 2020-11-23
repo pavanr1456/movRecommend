@@ -14,7 +14,7 @@ import {
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 import { AppComponent } from './app.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -25,7 +25,8 @@ import { AppComponent } from './app.component';
     MatToolbarModule,
     MatIconModule,
     MatSelectModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule,
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent],

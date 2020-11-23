@@ -8,15 +8,200 @@
 <div class="input-data">
   <mat-form-field appearance="fill" class="input-dropdown" floatLabel="never">
     <mat-label>Choose a movie</mat-label>
-    <mat-select [(value)]="selected">
+    <mat-select [(value)]="selected" (selectionChange)="getRecommendations()">
       <ng-container *ngFor="let movie of movies">
-        <mat-option [value]="movie.id">{{ movie.name }}</mat-option>
+        <mat-option [value]="movie.movie_id">{{ movie.movie_name }}</mat-option>
       </ng-container>
     </mat-select>
   </mat-form-field>
 </div>
 
+<mat-divider style="padding: 20px;"></mat-divider>
 
-<div *ngIf="selected">
-  selected movie: {{getSelectedMovie()}}
+<h3 class="input-text" *ngIf="currentRecommendations.length > 0">
+  We think you might like these !!
+</h3>
+
+<div>
+  <ngb-carousel [interval]="false">
+    <ng-template ngbSlide>
+      <div class="recom" *ngIf="currentRecommendations.length > 0">
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[0].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[0].movie_name }}
+            </span>
+          </div>
+        </mat-card>
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[1].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[1].movie_name }}
+            </span>
+          </div></mat-card
+        >
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[2].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[2].movie_name }}
+            </span>
+          </div></mat-card
+        >
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[3].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[2].movie_name }}
+            </span>
+          </div></mat-card
+        >
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[4].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[2].movie_name }}
+            </span>
+          </div></mat-card
+        >
+      </div>
+    </ng-template>
+
+    <ng-template ngbSlide>
+      <div class="recom" *ngIf="currentRecommendations.length > 5">
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[5].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[0].movie_name }}
+            </span>
+          </div>
+        </mat-card>
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[6].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[1].movie_name }}
+            </span>
+          </div></mat-card
+        >
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[7].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[2].movie_name }}
+            </span>
+          </div></mat-card
+        >
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[8].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[2].movie_name }}
+            </span>
+          </div></mat-card
+        >
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[9].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[2].movie_name }}
+            </span>
+          </div></mat-card
+        >
+      </div>
+    </ng-template>
+
+    <ng-template ngbSlide>
+      <div class="recom" *ngIf="currentRecommendations.length > 10">
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[10].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[0].movie_name }}
+            </span>
+          </div>
+        </mat-card>
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[11].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[1].movie_name }}
+            </span>
+          </div></mat-card
+        >
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[12].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[2].movie_name }}
+            </span>
+          </div></mat-card
+        >
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[13].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[2].movie_name }}
+            </span>
+          </div></mat-card
+        >
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[14].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[2].movie_name }}
+            </span>
+          </div></mat-card
+        >
+      </div>
+    </ng-template>
+
+    <ng-template ngbSlide>
+      <div class="recom" *ngIf="currentRecommendations.length > 15">
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[15].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[0].movie_name }}
+            </span>
+          </div>
+        </mat-card>
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[16].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[1].movie_name }}
+            </span>
+          </div></mat-card
+        >
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[17].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[2].movie_name }}
+            </span>
+          </div></mat-card
+        >
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[18].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[2].movie_name }}
+            </span>
+          </div></mat-card
+        >
+        <mat-card>
+          <div class="card-content">
+            <img class="image" [src]="currentRecommendations[19].image_link" />
+            <span class="movie-name">
+              {{ currentRecommendations[2].movie_name }}
+            </span>
+          </div></mat-card
+        >
+      </div>
+    </ng-template>
+  </ngb-carousel>
 </div>
