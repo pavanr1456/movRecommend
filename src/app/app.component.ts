@@ -11,6 +11,10 @@ export class AppComponent implements OnInit {
   selected = '';
   currentRecommendations = [];
   carousalTotal = 0;
+  username = 'admin';
+  password = '';
+  isLoggedIn = false;
+  hide = true;
 
   ngOnInit() {
     this.getMovies();
@@ -31,6 +35,18 @@ export class AppComponent implements OnInit {
 
   public getDefault(event) {
     event.target.src = `/assets/no_image_found.jpg`;
+  }
+
+  public login() {
+    if (this.username === 'admin' && this.password === 'admin') {
+      this.isLoggedIn = true;
+    } else {
+      alert('Incorrect credentials');
+    }
+  }
+
+  public logout() {
+    this.isLoggedIn = false;
   }
 
   /**
@@ -1551,7 +1567,7 @@ export class AppComponent implements OnInit {
             id: '14624892',
             names: 'The Purchase Price',
             genre:
-              "['Drama', 'Pre-Code', 'Comedy-drama', 'Black-and-white', 'Romantic drama']"  ,
+              "['Drama', 'Pre-Code', 'Comedy-drama', 'Black-and-white', 'Romantic drama']",
           },
         ],
       },

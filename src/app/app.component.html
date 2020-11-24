@@ -1,124 +1,163 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
+  <mat-toolbar-row class="header-row">
     <span>An efficient recommendation system using BERT-as-a-service</span>
+    <span *ngIf="isLoggedIn" (click)="logout()">LogOut</span>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<h4 class="input-text">Select a Movie you like!!</h4>
-<div class="input-data">
-  <mat-form-field appearance="fill" class="input-dropdown" floatLabel="never">
-    <mat-label>Choose a movie</mat-label>
-    <mat-select [(value)]="selected" (selectionChange)="getRecommendations()">
-      <ng-container *ngFor="let movie of movies">
-        <mat-option [value]="movie.id">{{ movie.name }}</mat-option>
-      </ng-container>
-    </mat-select>
-  </mat-form-field>
+<div *ngIf="isLoggedIn === false">
+  <div class="login-page">
+    <div class="username">
+      <mat-label style="margin: 10px;">Enter Username</mat-label>
+      <input [(ngModel)]="username" matInput />
+    </div>
+    <div class="username">
+      <mat-label style="margin: 10px;">Enter password</mat-label>
+      <input matInput type="password" [(ngModel)]="password"/>
+    </div>
+    <button class="login" (click)="login()">Login</button>
+  </div>
 </div>
 
-<mat-divider style="padding: 20px"></mat-divider>
+<div *ngIf="isLoggedIn === true">
+  <h4 class="input-text">Select a Movie you like!!</h4>
+  <div class="input-data">
+    <mat-form-field appearance="fill" class="input-dropdown" floatLabel="never">
+      <mat-label>Choose a movie</mat-label>
+      <mat-select [(value)]="selected" (selectionChange)="getRecommendations()">
+        <ng-container *ngFor="let movie of movies">
+          <mat-option [value]="movie.id">{{ movie.name }}</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-<h3 class="input-text" *ngIf="currentRecommendations.length > 0">
-  We think you might like these !!
-</h3>
+  <mat-divider style="padding: 20px"></mat-divider>
 
-<h3 class="input-text" *ngIf="currentRecommendations.length === 0 && selected">
-  We didn't find any recommendations !!
-</h3>
+  <h3 class="input-text" *ngIf="currentRecommendations.length > 0">
+    We think you might like these !!
+  </h3>
 
-<div>
-  <ngb-carousel [interval]="false">
-    <ng-template ngbSlide>
-      <div class="recom" *ngIf="currentRecommendations.length > 0">
-        <mat-card>
-          <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[0])" (error)="getDefault($event)"/>
-            <span class="movie-name">
-              {{ currentRecommendations[0].names }}
-            </span>
-          </div>
-        </mat-card>
-        <mat-card>
-          <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[1])" (error)="getDefault($event)"/>
-            <span class="movie-name">
-              {{ currentRecommendations[1].names }}
-            </span>
-          </div></mat-card
-        >
-        <mat-card>
-          <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[2])" (error)="getDefault($event)"/>
-            <span class="movie-name">
-              {{ currentRecommendations[2].names }}
-            </span>
-          </div></mat-card
-        >
-        <mat-card>
-          <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[3])" (error)="getDefault($event)"/>
-            <span class="movie-name">
-              {{ currentRecommendations[3].names }}
-            </span>
-          </div></mat-card
-        >
-        <mat-card>
-          <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[4])" (error)="getDefault($event)"/>
-            <span class="movie-name">
-              {{ currentRecommendations[4].names }}
-            </span>
-          </div></mat-card
-        >
-      </div>
-    </ng-template>
+  <h3
+    class="input-text"
+    *ngIf="currentRecommendations.length === 0 && selected"
+  >
+    We didn't find any recommendations !!
+  </h3>
 
-    <ng-template ngbSlide>
-      <div class="recom" *ngIf="currentRecommendations.length > 5">
-        <mat-card>
-          <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[5])" />
-            <span class="movie-name">
-              {{ currentRecommendations[5].names }}
-            </span>
-          </div>
-        </mat-card>
-        <mat-card>
-          <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[6])" />
-            <span class="movie-name">
-              {{ currentRecommendations[6].names }}
-            </span>
-          </div></mat-card
-        >
-        <mat-card>
-          <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[7])" />
-            <span class="movie-name">
-              {{ currentRecommendations[7].names }}
-            </span>
-          </div></mat-card
-        >
-        <mat-card>
-          <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[8])" />
-            <span class="movie-name">
-              {{ currentRecommendations[8].names }}
-            </span>
-          </div></mat-card
-        >
-        <mat-card>
-          <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[9])" />
-            <span class="movie-name">
-              {{ currentRecommendations[9].names }}
-            </span>
-          </div></mat-card
-        >
-      </div>
-    </ng-template>
+  <div>
+    <ngb-carousel [interval]="false">
+      <ng-template ngbSlide>
+        <div class="recom" *ngIf="currentRecommendations.length > 0">
+          <mat-card>
+            <div class="card-content">
+              <img
+                class="image"
+                [src]="getLink(currentRecommendations[0])"
+                (error)="getDefault($event)"
+              />
+              <span class="movie-name">
+                {{ currentRecommendations[0].names }}
+              </span>
+            </div>
+          </mat-card>
+          <mat-card>
+            <div class="card-content">
+              <img
+                class="image"
+                [src]="getLink(currentRecommendations[1])"
+                (error)="getDefault($event)"
+              />
+              <span class="movie-name">
+                {{ currentRecommendations[1].names }}
+              </span>
+            </div></mat-card
+          >
+          <mat-card>
+            <div class="card-content">
+              <img
+                class="image"
+                [src]="getLink(currentRecommendations[2])"
+                (error)="getDefault($event)"
+              />
+              <span class="movie-name">
+                {{ currentRecommendations[2].names }}
+              </span>
+            </div></mat-card
+          >
+          <mat-card>
+            <div class="card-content">
+              <img
+                class="image"
+                [src]="getLink(currentRecommendations[3])"
+                (error)="getDefault($event)"
+              />
+              <span class="movie-name">
+                {{ currentRecommendations[3].names }}
+              </span>
+            </div></mat-card
+          >
+          <mat-card>
+            <div class="card-content">
+              <img
+                class="image"
+                [src]="getLink(currentRecommendations[4])"
+                (error)="getDefault($event)"
+              />
+              <span class="movie-name">
+                {{ currentRecommendations[4].names }}
+              </span>
+            </div></mat-card
+          >
+        </div>
+      </ng-template>
 
-    <!-- <ng-template ngbSlide>
+      <ng-template ngbSlide>
+        <div class="recom" *ngIf="currentRecommendations.length > 5">
+          <mat-card>
+            <div class="card-content">
+              <img class="image" [src]="getLink(currentRecommendations[5])" />
+              <span class="movie-name">
+                {{ currentRecommendations[5].names }}
+              </span>
+            </div>
+          </mat-card>
+          <mat-card>
+            <div class="card-content">
+              <img class="image" [src]="getLink(currentRecommendations[6])" />
+              <span class="movie-name">
+                {{ currentRecommendations[6].names }}
+              </span>
+            </div></mat-card
+          >
+          <mat-card>
+            <div class="card-content">
+              <img class="image" [src]="getLink(currentRecommendations[7])" />
+              <span class="movie-name">
+                {{ currentRecommendations[7].names }}
+              </span>
+            </div></mat-card
+          >
+          <mat-card>
+            <div class="card-content">
+              <img class="image" [src]="getLink(currentRecommendations[8])" />
+              <span class="movie-name">
+                {{ currentRecommendations[8].names }}
+              </span>
+            </div></mat-card
+          >
+          <mat-card>
+            <div class="card-content">
+              <img class="image" [src]="getLink(currentRecommendations[9])" />
+              <span class="movie-name">
+                {{ currentRecommendations[9].names }}
+              </span>
+            </div></mat-card
+          >
+        </div>
+      </ng-template>
+
+      <!-- <ng-template ngbSlide>
       <div class="recom" *ngIf="currentRecommendations.length > 10">
         <mat-card>
           <div class="card-content">
@@ -163,7 +202,7 @@
       </div>
     </ng-template> -->
 
-    <!-- <ng-template ngbSlide>
+      <!-- <ng-template ngbSlide>
       <div class="recom" *ngIf="currentRecommendations.length > 15">
         <mat-card>
           <div class="card-content">
@@ -207,5 +246,6 @@
         >
       </div>
     </ng-template> -->
-  </ngb-carousel>
+    </ngb-carousel>
+  </div>
 </div>
