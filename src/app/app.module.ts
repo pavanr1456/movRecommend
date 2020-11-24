@@ -35,7 +35,7 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     NgbModule,
   ],
-  providers: [HttpClient, HttpHandler],
+  providers: [HttpClient],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
