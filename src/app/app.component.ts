@@ -29,6 +29,10 @@ export class AppComponent implements OnInit {
     return `/assets/${movie.id}.jpg`;
   }
 
+  public getDefault(event) {
+    event.target.src = `/assets/no_image_found.jpg`;
+  }
+
   /**
    * getMovies
    */

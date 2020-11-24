@@ -32,7 +32,7 @@
       <div class="recom" *ngIf="currentRecommendations.length > 0">
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[0])" />
+            <img class="image" [src]="getLink(currentRecommendations[0])" (error)="getDefault($event)"/>
             <span class="movie-name">
               {{ currentRecommendations[0].names }}
             </span>
@@ -40,7 +40,7 @@
         </mat-card>
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[1])" />
+            <img class="image" [src]="getLink(currentRecommendations[1])" (error)="getDefault($event)"/>
             <span class="movie-name">
               {{ currentRecommendations[1].names }}
             </span>
@@ -48,7 +48,7 @@
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[2])" />
+            <img class="image" [src]="getLink(currentRecommendations[2])" (error)="getDefault($event)"/>
             <span class="movie-name">
               {{ currentRecommendations[2].names }}
             </span>
@@ -56,7 +56,7 @@
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[3])" />
+            <img class="image" [src]="getLink(currentRecommendations[3])" (error)="getDefault($event)"/>
             <span class="movie-name">
               {{ currentRecommendations[3].names }}
             </span>
@@ -64,7 +64,7 @@
         >
         <mat-card>
           <div class="card-content">
-            <img class="image" [src]="getLink(currentRecommendations[4])" />
+            <img class="image" [src]="getLink(currentRecommendations[4])" (error)="getDefault($event)"/>
             <span class="movie-name">
               {{ currentRecommendations[4].names }}
             </span>
